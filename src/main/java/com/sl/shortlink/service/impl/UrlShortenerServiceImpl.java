@@ -14,6 +14,7 @@ import com.sl.shortlink.service.ShortCodeGenerator;
 import com.sl.shortlink.service.UrlShortenerService;
 import com.sl.shortlink.validator.CustomCodeValidator;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.URL;
 import org.modelmapper.ModelMapper;
@@ -31,8 +32,10 @@ import java.util.List;
 public class UrlShortenerServiceImpl implements UrlShortenerService {
 
     @Value("${url.domain}")
+    @Setter
     private String domain;
 
+    @Setter
     @Value("${url.code-length}")
     private int urlCodeLength;
 
@@ -102,11 +105,9 @@ public class UrlShortenerServiceImpl implements UrlShortenerService {
         String username = getUsernameFroSecurityContext();
         List<UrlMapping> userUrlList = urlShortenerRepo.findByAppUser_Username(username);
 
-        List<AnalyticsDto> analyticsDtoList = userUrlList.stream()
+        return userUrlList.stream()
                 .map(singleUrl -> modelMapper.map(singleUrl, AnalyticsDto.class))
                 .toList();
-
-        return analyticsDtoList;
     }
 
     private String getUsernameFroSecurityContext() {
