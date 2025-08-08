@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/NAZWA_UZYTKOWNIKA/NAZWA_REPO/branch/main/graph/badge.svg)](https://codecov.io/gh/NAZWA_UZYTKOWNIKA/NAZWA_REPO)
+[![codecov](https://codecov.io/gh/konx8/ShortLinkApp/branch/main/graph/badge.svg)](https://codecov.io/gh/NAZWA_UZYTKOWNIKA/NAZWA_REPO)
 
 
 # 📎 Link Shortening Service
