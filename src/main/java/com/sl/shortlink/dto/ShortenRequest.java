@@ -13,4 +13,6 @@ public class ShortenRequest {
     @URL
     private String url;
 
+    private String customCode;
+
 }
