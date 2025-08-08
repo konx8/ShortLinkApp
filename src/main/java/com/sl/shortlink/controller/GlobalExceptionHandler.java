@@ -1,9 +1,6 @@
 package com.sl.shortlink.controller;
 
-import com.sl.shortlink.exception.InvalidShortCodeException;
-import com.sl.shortlink.exception.SaveFailException;
-import com.sl.shortlink.exception.ShortCodeAlreadyExistsException;
-import com.sl.shortlink.exception.UrlNotFoundException;
+import com.sl.shortlink.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +50,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .body("Short code already in use");
+    }
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseEntity<String> handleUserAlreadyExistException(UserAlreadyExistException ex) {
+        log.warn("Short code already in use ", ex);
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body("Username already exist");
     }
 
 }
