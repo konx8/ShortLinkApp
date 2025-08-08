@@ -20,11 +20,16 @@ public class UrlMapping {
 
     private String originalUrl;
 
+    @Column(unique = true)
     private String shortCode;
 
     private LocalDateTime createdAt;
 
     private int clickCount = 0;
+
+    @ManyToOne
+    @JoinColumn(name = "app_user_id")
+    private AppUser appUser;
 
     @PrePersist
     protected void onCreate() {
