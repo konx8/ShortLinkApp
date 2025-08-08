@@ -4,6 +4,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
+    @Setter
     @Value("${security.secret}")
     private String secret;
 
@@ -36,7 +38,7 @@ public class JwtUtil {
 
     public boolean validateToken(String token) {
         try {
-            extractUsername(token); // throws if invalid
+            extractUsername(token);
             return true;
         } catch (Exception e) {
             return false;
