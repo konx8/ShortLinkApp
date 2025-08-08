@@ -19,7 +19,7 @@ public class UrlShortenerController {
 
     @PostMapping("/shorten")
     public ResponseEntity<ShortenResponse> shortenUrl(@Valid @RequestBody ShortenRequest request) {
-        return ResponseEntity.ok(urlShortenerService.shorten(request.getUrl()));
+        return ResponseEntity.ok(urlShortenerService.shorten(request.getUrl(), request.getCustomCode()));
     }
 
     @GetMapping("/{shortCode}")
@@ -28,7 +28,5 @@ public class UrlShortenerController {
                 .location(URI.create(urlShortenerService.getOriginalUrl(shortCode)))
                 .build();
     }
-
-
 
 }

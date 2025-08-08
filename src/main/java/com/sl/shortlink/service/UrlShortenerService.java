@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.URL;
 
 public interface UrlShortenerService {
 
-    ShortenResponse shorten(@NotBlank @URL String url);
+    ShortenResponse shorten(@NotBlank @URL String url, String customCode);
 
     String getOriginalUrl(String shortCode);
 
