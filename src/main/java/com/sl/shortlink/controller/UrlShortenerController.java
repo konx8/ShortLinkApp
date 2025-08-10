@@ -6,12 +6,12 @@ import com.sl.shortlink.model.AnalyticsDto;
 import com.sl.shortlink.service.UrlShortenerService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -25,10 +25,9 @@ public class UrlShortenerController {
     }
 
     @GetMapping("/{shortCode}")
-    public ResponseEntity<Void> redirectToOriginal(@PathVariable String shortCode) {
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create(urlShortenerService.getOriginalUrl(shortCode)))
-                .build();
+    public ResponseEntity<Map<String, String>> getOriginalUrl(@PathVariable String shortCode) {
+        String originalUrl = urlShortenerService.getOriginalUrl(shortCode);
+        return ResponseEntity.ok(Collections.singletonMap("url", originalUrl));
     }
 
     @GetMapping("/analytics")

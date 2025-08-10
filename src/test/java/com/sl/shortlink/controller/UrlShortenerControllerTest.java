@@ -12,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.net.URI;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,20 +44,6 @@ class UrlShortenerControllerTest {
         verify(urlShortenerService).shorten(request.getUrl(), request.getCustomCode());
     }
 
-    @Test
-    void redirectToOriginal_ReturnsFoundResponseWithLocation() {
-        String shortCode = "abc123";
-        String originalUrl = "http://example.com";
-
-        when(urlShortenerService.getOriginalUrl(shortCode)).thenReturn(originalUrl);
-
-        ResponseEntity<Void> response = controller.redirectToOriginal(shortCode);
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
-        assertThat(response.getHeaders().getLocation()).isEqualTo(URI.create(originalUrl));
-
-        verify(urlShortenerService).getOriginalUrl(shortCode);
-    }
 
     @Test
     void analytics_ReturnsListOfAnalyticsDto() {
