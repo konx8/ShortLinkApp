@@ -1,6 +1,10 @@
 name: Java CI with Maven and Jacoco
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -24,8 +28,3 @@ jobs:
         with:
           files: target/site/jacoco/jacoco.xml
           fail_ci_if_error: true
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          files: ./target/jacoco.exec
